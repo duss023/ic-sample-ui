@@ -1,0 +1,13 @@
+piVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: ic-sample-ui
+  name: ic-sample-ui
+spec:
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: ic-sample-ui
+    weight: 100
