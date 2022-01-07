@@ -1,7 +1,8 @@
 FROM image-registry.openshift-image-registry.svc:5000/openshift/python:latest
 
-COPY . /opt/app-root/src
 WORKDIR /opt/app-root/src
+COPY . /opt/app-root/src
+RUN chown -R :0 /opt/app-root/src
 
 RUN pip install -r requirements.txt
 
