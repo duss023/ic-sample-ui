@@ -15,7 +15,7 @@ spec:
         app: ic-sample-ui
     spec:
       containers:
-        - image:image-registry.openshift-image-registry.svc:5000/ic-pipelines/ic-sample-ui:latest 
+        - image: image-registry.openshift-image-registry.svc:5000/ic-pipelines/ic-sample-ui:latest 
           imagePullPolicy: Always
           name: ic-sample-ui
           ports:
