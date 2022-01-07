@@ -7,4 +7,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 8080
 
-CMD ["python", "./app.py"]
+CMD ["tail", "-f", "/dev/null"]
