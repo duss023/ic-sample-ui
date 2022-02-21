@@ -2,6 +2,10 @@
 
 Image Classifcation UI Example using Flask  
 
+## Architecture
+
+![Architecture](https://github.com/mmitsugi/ic-sample-api/blob/main/doc/images/architecture_ui_and_api.png)
+
 ## Prerequisites
 
 * OpenShift 4
