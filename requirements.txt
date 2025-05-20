@@ -1,4 +1,4 @@
-protobuf==4.21.0
+protobuf==4.21.6
 tensorflow==2.12.1
 Pillow==8.4.0
 Flask==2.0.2
