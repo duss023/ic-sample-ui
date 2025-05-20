@@ -39,7 +39,7 @@ spec:
   - name: build-image
     taskRef:
       name: buildah
-      kind: ClusterTask
+      kind: Task
     params:
     - name: DOCKERFILE
       value: "ic-sample-ui/Dockerfile"
