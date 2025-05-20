@@ -30,7 +30,7 @@ $ tkn pipeline list
 ```
 Run pipeline
 ```bash
-$ tkn pipeline start build-and-deploy -w name=shared-workspace,claimName=model-pv-claim -p deployment-name=ic-sample-ui -p git-url=https://github.com/mmitsugi/ic-sample-ui.git -p IMAGE=image-registry.openshift-image-registry.svc:5000/ic-pipelines/ic-sample-ui --use-param-defaults
+$ tkn pipeline start build-and-deploy -w name=shared-workspace,claimName=model-pv-claim -p deployment-name=ic-sample-ui -p git-url=https://github.com/duss023/ic-sample-ui.git -p IMAGE=image-registry.openshift-image-registry.svc:5000/ic-pipelines/ic-sample-ui --use-param-defaults
 ```
 
 ## References
