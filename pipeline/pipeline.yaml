@@ -15,8 +15,6 @@ spec:
           value: $(params.buildconfig-name)
         - name: namespace
           value: $(params.namespace)
-      runAfter:
-        - clone-repo
       taskRef:
         kind: Task
         name: start-oc-build
