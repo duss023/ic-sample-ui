@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: start-buildconfig
+spec:
+  params:
+    - name: buildconfig
+      type: string
+  steps:
+    - name: start-oc-build
+      image: quay.io/openshift/origin-cli:4.12
+      script: |
+        #!/bin/sh
+        echo "Starting BuildConfig: $(params.buildconfig)"
+        oc start-build $(params.buildconfig) --wait
