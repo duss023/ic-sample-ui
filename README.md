@@ -9,15 +9,19 @@ Image Classifcation UI Example using Flask
 ## Prerequisites
 
 * OpenShift 4
-* OpenShift Pipeline Operator installed
-* ic-sample-api installed
 
 ## Deployment steps
 
-Set project to the project used in ic-sample-api
+创建镜像库
 ```bash
-$ oc project ic-pipelines
+$ oc create imagestream ic-sample-ui
 ```
+
+创建BuildConfig
+内容参照 ./BuildConfig
+
+
+
 Create pipeline
 ```bash
 $ oc create -f pipeline/pipeline.yaml
