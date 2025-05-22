@@ -1,0 +1,23 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: ic-sample-ui-build
+  namespace: kszngy-dev  # 替换为你所在的命名空间
+spec:
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/duss023/ic-sample-ui.git'
+      ref: main
+    contextDir: . 
+  strategy:
+    type: Docker
+    dockerStrategy:
+      from:
+        kind: ImageStreamTag
+        name: python:latest
+        namespace: openshift
+  output:
+    to:
+      kind: ImageStreamTag
+      name: ic-sample-ui:latest
