@@ -18,11 +18,13 @@ $ oc create imagestream ic-sample-ui
 ```
 
 创建BuildConfig
-内容参照 ./BuildConfig
-
-Create apply manifests task
 ```bash
-$ oc create -f pipeline/apply_manifest_task.yaml
+内容参照 ./BuildConfig.yaml
+```
+
+创建 manifests task
+```bash
+内容参照 pipeline/apply_manifest_task.yaml
 ```
 
 Create pipeline
