@@ -12,7 +12,7 @@ spec:
       default: "k8s"
   steps:
     - name: apply
-      image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+      image: image-registry.openshift-image-registry.svc:5000/duss023-dev/ic-sample-ui:latest
       workingDir: '$(workspaces.source.path)'
       command: ["/bin/bash", "-c"]
       args:
