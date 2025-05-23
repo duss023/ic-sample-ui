@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: run-build-with-bc
+spec:
+  pipelineRef:
+    name: build-with-bc-pipeline
+  params:
+    - name: buildconfig-name
+      value: ic-sample-ui-build
+    - name: namespace
+      value: duss023-dev
+    - name: deployment-name
+      value: ic-sample-ui
