@@ -9,7 +9,7 @@ spec:
     - name: namespace
       type: string
   tasks:
-    - name: buildconfig
+    - name: start-oc-build
       params:
         - name: buildconfig-name
           value: $(params.buildconfig-name)
@@ -23,7 +23,7 @@ spec:
         - name: manifest-dir
           value: ic-sample-ui/k8s
       runAfter:
-        - buildconfig
+        - start-oc-build
       taskRef:
         kind: Task
         name: apply-manifests
