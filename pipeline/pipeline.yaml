@@ -27,8 +27,5 @@ spec:
       taskRef:
         kind: Task
         name: apply-manifests
-      workspaces:
-        - name: source
-          workspace: shared-workspace
   workspaces:
     - name: shared-workspace
