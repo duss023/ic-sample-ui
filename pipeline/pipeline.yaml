@@ -8,27 +8,24 @@ spec:
       type: string
     - name: namespace
       type: string
+    - name: deployment-name
+      type: string
   tasks:
     - name: start-oc-build
       params:
-        - name: buildconfig-name
+        - name: buildconfig
           value: $(params.buildconfig-name)
-        - name: namespace
-          value: $(params.namespace)
       taskRef:
         kind: Task
         name: start-oc-build
-    - name: apply-manifests
+    - name: restart-deployment-task
       params:
-        - name: manifest-dir
-          value: ic-sample-ui/k8s
+        - name: deployment-name
+          value: $(params.deployment-name)
+        - name: namespace
+          value: $(params.namespace)
       runAfter:
         - start-oc-build
       taskRef:
         kind: Task
-        name: apply-manifests
-      workspaces:
-        - name: source
-          workspace: shared-workspace
-  workspaces:
-    - name: shared-workspace
+        name: restart-deployment
