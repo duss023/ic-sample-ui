@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: restart-deployment
+spec:
+  params:
+    - name: deployment-name
+      type: string
+    - name: namespace
+      type: string
+  steps:
+    - computeResources: {}
+      image: 'image-registry.openshift-image-registry.svc:5000/openshift/cli:latest'
+      name: restart
+      script: |
+        #!/bin/sh
+        oc rollout restart deployment/$(inputs.params.deployment-name) -n $(inputs.params.namespace)
