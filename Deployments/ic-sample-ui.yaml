@@ -1,0 +1,61 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ic-sample-ui
+  namespace: duss023-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ic-sample-ui
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ic-sample-ui
+      annotations:
+        kubectl.kubernetes.io/restartedAt: '2025-05-23T06:49:06Z'
+        openshift.openshift.io/restartedAt: '2025-05-23T01:22:04.109Z'
+    spec:
+      containers:
+        - name: container
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/duss023-dev/ic-sample-ui@sha256:81431599c4a8b6318b5d944922e73370379124fe0078b36e64854907d23534e7
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          env: []
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+      imagePullSecrets: []
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+  paused: false
+status:
+  observedGeneration: 11
+  replicas: 1
+  updatedReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1
+  conditions:
+    - type: Available
+      status: 'True'
+      lastUpdateTime: '2025-05-23T06:49:32Z'
+      lastTransitionTime: '2025-05-23T06:49:32Z'
+      reason: MinimumReplicasAvailable
+      message: Deployment has minimum availability.
+    - type: Progressing
+      status: 'True'
+      lastUpdateTime: '2025-05-23T06:49:32Z'
+      lastTransitionTime: '2025-05-23T01:20:24Z'
+      reason: NewReplicaSetAvailable
+      message: ReplicaSet "ic-sample-ui-589f955947" has successfully progressed.

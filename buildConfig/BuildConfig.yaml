@@ -2,7 +2,7 @@ apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
   name: ic-sample-ui-build
-  namespace: kszngy-dev  # 替换为你所在的命名空间
+  namespace: duss023-dev  # 替换为你所在的命名空间
 spec:
   source:
     type: Git

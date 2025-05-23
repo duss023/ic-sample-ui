@@ -1,0 +1,28 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: run-build-with-bc-template
+spec:
+  params:
+    - name: git-repo-url
+    - name: git-revision
+    - name: git-branch
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1
+      kind: PipelineRun
+      metadata:
+        generateName: run-build-with-bc
+      spec:
+        pipelineRef:
+          name: build-with-bc-pipeline
+        params:
+          - name: git-url
+            value: $(params.git-repo-url)
+          - name: git-revision
+            value: $(params.git-revision)
+          - name: buildconfig-name
+            value: ic-sample-ui-build
+          - name: namespace
+            value: duss023-dev
+          - name: deployment-name
+            value: ic-sample-ui

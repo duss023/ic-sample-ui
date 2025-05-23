@@ -2,46 +2,86 @@
 
 Image Classifcation UI Example using Flask  
 
-## Architecture
-
-![Architecture](https://github.com/mmitsugi/ic-sample-api/blob/main/doc/images/architecture_ui_and_api.png)
-
 ## Prerequisites
+redhatアカウントを作成して、sandboxが30日フリーで使える
+https://developers.redhat.com/developer-sandbox
 
-* OpenShift 4
 
-## Deployment steps
+## 事前準備としてBuildConfigとDeploymentsを予め用意
+以前は唐さんから説明してくれたので、ここで省略。。。。。。。
 
-创建镜像库
+## Pipeline作成
+BuildConfigの起動task作成
 ```bash
-$ oc create imagestream ic-sample-ui
+内容参照 pipeline/start-oc-build.yaml
 ```
 
-创建BuildConfig
+Deploymentsの起動task作成
 ```bash
-内容参照 ./BuildConfig.yaml
+内容参照 pipeline/restart-deployment.yaml
 ```
 
-创建 manifests task
+pipeline作成
 ```bash
-内容参照 pipeline/apply_manifest_task.yaml
+内容参照 pipeline/pipeline.yaml
 ```
 
-Create pipeline
+pipelineRun作成
 ```bash
-$ oc create -f pipeline/pipeline.yaml
-```
-Check task, clustertask, pipeline list
-```bash
-$ tkn task list
-$ tkn clustertask list
-$ tkn pipeline list
-```
-Run pipeline
-```bash
-$ tkn pipeline start build-and-deploy -w name=shared-workspace,claimName=model-pv-claim -p deployment-name=ic-sample-ui -p git-url=https://github.com/duss023/ic-sample-ui.git -p IMAGE=image-registry.openshift-image-registry.svc:5000/ic-pipelines/ic-sample-ui --use-param-defaults
+内容参照 pipeline/run-build-with-bc.yaml
+下記パラメータの値を自分環境と合わせて差し替えが必要
+  params:
+    - name: buildconfig-name
+      value: ic-sample-ui-build
+    - name: namespace
+      value: duss023-dev
+    - name: deployment-name
+      value: ic-sample-ui
+
 ```
 
-## References
+## Trigger作成
+TriggerBinding作成
+```bash
+内容参照 Trigger/TriggerBinding.yaml
+```
 
-* [OpenShift Pipelines Tutorial](https://github.com/openshift/pipelines-tutorial)
+TriggerTemplate作成
+```bash
+内容参照 Trigger/TriggerTemplate.yaml
+下記パラメータの値を自分環境と合わせて差し替えが必要
+  params:
+    - name: buildconfig-name
+      value: ic-sample-ui-build
+    - name: namespace
+      value: duss023-dev
+    - name: deployment-name
+      value: ic-sample-ui
+```
+
+EventListener作成
+```bash
+内容参照 Trigger/EventListener.yaml
+```
+
+EventListenerURL公開
+```bash
+oc expose svc el-github-listener
+oc get route el-github-listener
+```
+
+githubにwebhook追加
+```bash
+１．githubのプロジェクトに下記画面を開く
+Settings → Webhooks → Add webhook
+
+２．下記のように入力
+Payload URL：http://EventListener公開したURL
+Content type：application/json
+Secret：空
+Events：Just the push event
+SSL verification：Enable SSL verification
+```
+
+テスト
+githubのプロジェクトを修正してcommit、podが作り直しを見えること

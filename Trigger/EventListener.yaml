@@ -1,0 +1,18 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: github-listener
+spec:
+  triggers:
+    - name: github-push-trigger
+      bindings:
+        - ref: github-push-binding
+      template:
+        ref: run-build-with-bc-template
+      interceptors:
+        - name: only-push-main
+          ref:
+            name: cel
+          params:
+            - name: filter
+              value: "body.ref == 'refs/heads/main'"
