@@ -20,7 +20,7 @@ spec:
       containers:
         - name: container
           image: >-
-            image-registry.openshift-image-registry.svc:5000/duss023-dev/ic-sample-ui@sha256:81431599c4a8b6318b5d944922e73370379124fe0078b36e64854907d23534e7
+            image-registry.openshift-image-registry.svc:5000/duss023-dev/ic-sample-ui:latest
           ports:
             - containerPort: 8080
               protocol: TCP
